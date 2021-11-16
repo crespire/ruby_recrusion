@@ -5,14 +5,31 @@ def merge_sort(array)
   else
     left, right = merge_sort(array.take(len/2)), merge_sort(array.drop(len/2))
 
-    result = []
-    # merge them (if length was odd, left will be the lower length array)
-    # until left is empty
-    #   for each right
-    #     compare left and right -> remove lower element to results
+    l, r, i = 0, 0, 0 # Indicies for left, right, index
+    while l < left.length && r < right.length do
+      if left[l] < right[r]
+        array[i] = left[l]
+        l += 1
+      else
+        array[i] = right[r]
+        r += 1
+      end
+      i += 1
+    end
 
-    # check if both left and right are empty, if one isn't, it hsould only contain one element, so add it to results
-
-    result
+    # Consume remaining digits not used above, only one of these loops should run.
+    while l < left.length do
+      array[i] = left[l]
+      l += 1
+      i += 1
+    end
+    
+    while r < right.length do
+      array[i] = right[r]
+      r += 1
+      i += 1
+    end
+    
+    array
   end
 end
